@@ -7,6 +7,7 @@ import ResultScreen from './src/screens/ResultScreen';
 const Stack = createStackNavigator();
 
 export default function App() {
+  console.log('App component loaded');
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">

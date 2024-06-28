@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Picker } from 'react-native';
+import { View, Text, TextInput, Button } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 
 const InputForm = ({ navigation }) => {
   const [weight, setWeight] = useState('');
