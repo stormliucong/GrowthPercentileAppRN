@@ -3,4 +3,10 @@ export const calculatePercentile = (weight, height, age, gender, standard) => {
     // This is a placeholder and should be replaced with actual logic
     return 50; // This is just a placeholder
   };
+
+export const calculateBMI = (weight, height) => {
+    // Implement the logic to calculate the BMI based on the input
+    const BMI = weight / (height * height);
+    return BMI;
+  };
   

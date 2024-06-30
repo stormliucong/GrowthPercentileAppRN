@@ -37,3 +37,7 @@ yarn-error.*
 # python venv
 */.venv
 */__pycache__
+
+# android/ios
+android/
+ios/
