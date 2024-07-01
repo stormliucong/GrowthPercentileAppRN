@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, SafeAreaView } from 'react-native';
 import InputForm from '../components/InputForm';
 import { useEffect } from 'react';
+import { useState } from 'react';
 
 const HomeScreen = ({ navigation }) => {
   const [weight, setWeight] = useState('');

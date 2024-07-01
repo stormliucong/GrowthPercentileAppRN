@@ -12,7 +12,7 @@ const ResultScreen = ({ route }) => {
   
   const inputFeatures = processFeatures(weight, height, gender);
   console.log('inputFeatures', inputFeatures);
-  const modelPath = 'https://github.com/stormliucong/GrowthPercentileAppRN/blob/main/models/torch_mlp_model.onnx';
+  const modelPath = 'https://github.com/stormliucong/GrowthPercentileAppRN/raw/main/models/torch_mlp_model.onnx';
   useEffect(() => {
     const loadModel = async () => {
       try {
