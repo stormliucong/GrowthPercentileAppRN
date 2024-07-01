@@ -9,6 +9,8 @@ const ResultScreen = ({ route }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [riskScore, setRiskScore] = useState(null);
   const percentile = calculatePercentile(weight, height, age, gender, standard);
+  const heights_meters = height / 100 // Convert height from cm to meters
+  const bmi = weight / (heights_meters ** 2)
   
   const inputFeatures = processFeatures(weight, height, gender);
   console.log('inputFeatures', inputFeatures);
@@ -20,7 +22,7 @@ const ResultScreen = ({ route }) => {
         const result = await loadAndRunModel(modelPath, inputFeatures);
 
         // Set the risk score
-        setRiskScore(output[0]);
+        setRiskScore(result);
         setIsLoading(false);
       } catch (error) {
         console.error('Failed to load ONNX model:', error);
@@ -42,8 +44,9 @@ const ResultScreen = ({ route }) => {
 
   return (
     <View>
-      <Text>Percentile: {percentile}</Text>
-      <Text>Risk: {riskScore} </Text>
+      {/* <Text>Percentile: {percentile}</Text> */}
+      <Text>Predicted BMI: {riskScore} </Text>
+      <Text>BMI: {bmi}</Text>
     </View>
   );
 };
