@@ -1,47 +1,42 @@
-// utils/onnxModel.js
-import * as ort from 'onnxruntime-react-native'
-import { Asset } from "expo-asset";
-import RNFS from 'react-native-fs';
-import FileSystem from 'expo-file-system';
-// import torch_mlp_model from '../../assets/torch_mlp_model.onnx';
+import { Platform } from 'react-native';
 
+let ort;
+console.log('Platform.OS:', Platform.OS);
 
-async function fetchModelFile(url) {
-  try {
-      const response = await fetch(url);
-      if (!response.ok) {
-          throw new Error(`Failed to fetch the model file: ${response.statusText}`);
-      }
-      console.log('Response:', response);
-      const arrayBuffer = await response.arrayBuffer();
-      return arrayBuffer;
-  } catch (error) {
-      console.error('Error fetching model file:', error);
-      return null;
-  }
+if (Platform.OS === 'android') {
+  ort=require('onnxruntime-react-native');
 }
+if (Platform.OS === 'ios') {
+  ort=require('onnxruntime-react-native');
+}
+if (Platform.OS === 'web') {
+  console.log('using onnxruntime-web')
+  ort=require('onnxruntime-web');
+}
+
+
 
 
 export const loadAndRunModel = async (modelPath, inputFeatures) => {
   try {
     if (!ort.InferenceSession) {
-      throw new Error('ort.InferenceSession is not available. Ensure onnxruntime-web is properly imported.');
+      throw new Error('ort.InferenceSession is not available. Ensure onnxruntime-web/onnxruntime-react-native is properly imported.');
     }
-    console.log('Model Path:', modelPath);
-    const arrayBuffer = await fetchModelFile(modelPath);
-    if (!arrayBuffer) {
-      throw new Error('Failed to load the model file');
+    // const modelPath = '/Users/cl3720/Desktop/GrowthPercentileAppRN/assets/torch_mlp_model.onnx'
+    modelPath = 'https://github.com/stormliucong/GrowthPercentileAppRN/raw/main/models/torch_mlp_model.onnx'
+    try {
+      response = await fetch(modelPath);
     }
-    else {
-      console.log('Model loaded:', arrayBuffer);
+    catch (error) {
+      console.error('Failed to fetch model file:', error);
     }
-    // The following code is commented out because it is not working
-    // const modelPath = require("./assets/torch_mlp_model.onnx");
-    // const assets = await Asset.loadAsync(modelPath);
-    // const modelUri = assets[0].localUri;
-    // It only works when the model is loaded from the hard coded path
-    const modelUri = '/Users/cl3720/Desktop/GrowthPercentileAppRN/assets/torch_mlp_model.onnx'
-    const session = await ort.InferenceSession.create(modelUri, {});
+    try {
+      arrayBuffer = await response.arrayBuffer();    
+    }
+    catch (error) {
+      console.error('Failed to parse array buffer:', error);
+    }
+    const session = await ort.InferenceSession.create(arrayBuffer, {});
 
     // const session = await ort.InferenceSession.create(arrayBuffer, {});
     console.log('Inference session created successfully');
@@ -83,7 +78,6 @@ export const processFeatures = (weight_kg, height_cm, gender) => {
     
     // 'Gender','Height_cm','Weight_kg','Height_ft','Weight_lb'
     const inputFeatures = [genderValue, height_cm, weight_kg, height_ft, weigth_lb]
-    console.log('inputFeatures:', inputFeatures);
     // z = (x - u) / s
     // mean and std in adult
     height_cm_mean = 169.5;

@@ -5,20 +5,20 @@ import { loadAndRunModel, processFeatures } from '../utils/onnxModel';
 import { useEffect, useState } from 'react';
 
 const ResultScreen = ({ route }) => {
-  const { weight, height, age, gender, standard } = route.params;
+  const { weight, height, age, gender, standard, modelPath } = route.params;
   const [isLoading, setIsLoading] = useState(true);
   const [riskScore, setRiskScore] = useState(null);
-  const percentile = calculatePercentile(weight, height, age, gender, standard);
+  // const percentile = calculatePercentile(weight, height, age, gender, standard);
   const heights_meters = height / 100 // Convert height from cm to meters
   const bmi = weight / (heights_meters ** 2)
   
   const inputFeatures = processFeatures(weight, height, gender);
-  console.log('inputFeatures', inputFeatures);
   // const modelPath = 'https://github.com/stormliucong/GrowthPercentileAppRN/raw/main/models/torch_mlp_model.onnx';
   useEffect(() => {
     const loadModel = async () => {
       try {
         // Load and Run the ONNX model
+        console.log('loadModel modelPath', modelPath);
         const result = await loadAndRunModel(modelPath, inputFeatures);
 
         // Set the risk score

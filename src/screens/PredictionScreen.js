@@ -4,10 +4,8 @@ import InputForm from '../components/InputForm';
 
 
 const PredictionScreen = ({ route, navigation }) => {
-  console.log('navigation:', route.params);
   const {patientData, modelPath} = route.params;
-  console.log('patientData:', patientData);
-  console.log('modelPath:', modelPath);
+
 
   return (
     <SafeAreaView style={{ flex: 1, padding: 16 }}>

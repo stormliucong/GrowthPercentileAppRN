@@ -20,6 +20,7 @@
     "expo-file-system": "^17.0.1",
     "expo-status-bar": "~1.12.1",
     "onnxjs": "^0.1.8",
+    "onnxruntime-common": "^1.18.0",
     "onnxruntime-react-native": "latest",
     "onnxruntime-web": "^1.18.0",
     "react": "18.2.0",

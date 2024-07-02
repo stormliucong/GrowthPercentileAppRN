@@ -3,6 +3,12 @@
     "name": "GrowthPercentileAppExpo",
     "slug": "GrowthPercentileAppExpo",
     "version": "1.0.0",
+    "onnxruntimeExtensionsEnabled": "true",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -29,7 +35,7 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "onnxruntime-react-native"
+      ["onnxruntime-react-native", "onnxruntime-web"]
     ]
   }
 }

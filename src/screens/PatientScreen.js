@@ -49,7 +49,7 @@ const PatientScreen = ({ navigation }) => {
             <Text>{JSON.stringify(patientData)}</Text>
             <Text>Select a model</Text>
             <Picker selectedValue={selectedValue} onValueChange={setSelectedValue}>
-            <Picker.Item label="BMI predictor" value="'https://github.com/stormliucong/GrowthPercentileAppRN/raw/main/models/torch_mlp_model.onnx'" />
+            <Picker.Item label="BMI predictor" value="https://github.com/stormliucong/GrowthPercentileAppRN/raw/main/models/torch_mlp_model.onnx" />
             <Picker.Item label="A null model" value="" />
             </Picker>
             {selectedValue && <Text>modelPath: {selectedValue}</Text>}
