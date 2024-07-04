@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import { View } from 'react-native';
+import { Provider as PaperProvider, Text } from 'react-native-paper';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import InputForm from '../components/InputForm';
 
 
@@ -8,13 +10,14 @@ const PredictionScreen = ({ route, navigation }) => {
 
 
   return (
-    <SafeAreaView style={{ flex: 1, padding: 16 }}>
-      <View>
-      <Text>Welcome to BMI Calculator</Text>
-      <InputForm navigation={navigation} patientData={patientData} modelPath={modelPath} />
-    </View>
-    </SafeAreaView>
-    
+    <SafeAreaProvider>
+      <PaperProvider>
+        <View>
+        <Text style={{fontSize: 20, fontWeight: 'bold', marginTop: 20, marginBottom: 20}}>Welcome to BMI Calculator</Text>
+        <InputForm navigation={navigation} patientData={patientData} modelPath={modelPath} />
+      </View>
+      </PaperProvider>
+    </SafeAreaProvider>
   );
 };
 

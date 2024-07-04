@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View } from 'react-native';
+import { Provider as PaperProvider, Text, ActivityIndicator } from 'react-native-paper';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { calculatePercentile } from '../utils/growthPercentile';
 import { loadAndRunModel, processFeatures } from '../utils/onnxModel';
 import { useEffect, useState } from 'react';
@@ -35,19 +37,28 @@ const ResultScreen = ({ route }) => {
 
   if (isLoading) {
     return (
-      <View>
-        <ActivityIndicator size="large" color="#0000ff" />
-        <Text>Loading model...</Text>
-      </View>
+      <SafeAreaProvider>
+        <PaperProvider>
+          <View>
+            <ActivityIndicator size="large" color="#0000ff" />
+            <Text>Loading model...</Text>
+          </View>
+        </PaperProvider>
+      </SafeAreaProvider>
     );
   }
 
   return (
-    <View>
-      {/* <Text>Percentile: {percentile}</Text> */}
-      <Text>Predicted BMI: {riskScore} </Text>
-      <Text>BMI: {bmi}</Text>
-    </View>
+    <SafeAreaProvider>
+      <PaperProvider>
+        <View>
+          <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 20, marginBottom: 20 }}>Result</Text>
+          {/* <Text>Percentile: {percentile}</Text> */}
+          <Text>Predicted BMI: {riskScore} </Text>
+          <Text>BMI: {bmi}</Text>
+        </View>
+      </PaperProvider>
+    </SafeAreaProvider>
   );
 };
 

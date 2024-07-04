@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View } from 'react-native';
+import { Provider as PaperProvider, Text, TextInput, Button} from 'react-native-paper';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 import {Picker} from '@react-native-picker/picker';
 
 const InputForm = ({ navigation, patientData, modelPath }) => {
@@ -28,25 +31,22 @@ const InputForm = ({ navigation, patientData, modelPath }) => {
   };
 
   return (
-    <View>
-      <Text>Weight (kg)</Text>
-      <TextInput value={weight} onChangeText={setWeight} keyboardType="numeric" />
-      <Text>Height (cm)</Text>
-      <TextInput value={height} onChangeText={setHeight} keyboardType="numeric" />
-      <Text>Age (months)</Text>
-      <TextInput value={age} onChangeText={setAge} keyboardType="numeric" />
-      <Text>Gender</Text>
-      <Picker selectedValue={gender} onValueChange={setGender}>
-        <Picker.Item label="Male" value="male" />
-        <Picker.Item label="Female" value="female" />
-      </Picker>
-      <Text>Standard</Text>
-      <Picker selectedValue={standard} onValueChange={setStandard}>
-        <Picker.Item label="US" value="US" />
-        <Picker.Item label="WHO" value="WHO" />
-      </Picker>
-      <Button title="Calculate" onPress={handleSubmit} />
-    </View>
+        <View>
+          <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 20}}>Enter Patient Information</Text>
+          <Text>Weight (kg)</Text>
+          <TextInput value={weight} onChangeText={setWeight} keyboardType="numeric" />
+          <Text>Height (cm)</Text>
+          <TextInput value={height} onChangeText={setHeight} keyboardType="numeric" />
+          <Text>Age (months)</Text>
+          <TextInput value={age} onChangeText={setAge} keyboardType="numeric" />
+          <Text>Gender</Text>
+          <Picker selectedValue={gender} onValueChange={setGender}>
+            <Picker.Item label="Male" value="male" />
+            <Picker.Item label="Female" value="female" />
+          </Picker>
+          <Button title="Calculate" onPress={handleSubmit} style={{width: 150, alignItems: 'center', justifyContent: 'center'}} mode="contained">Calculate</Button>
+        </View>
+     
   );
 };
 
